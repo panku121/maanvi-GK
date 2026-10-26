@@ -4,17 +4,7 @@ import Icon from "../components/Icon.jsx";
 import Mascot from "../components/Mascot.jsx";
 import { CATEGORIES, sets } from "../data/index.js";
 import { LEVELS } from "../data/q.js";
-import {
-  answeredCount,
-  getProgress,
-  isMuted,
-  localDay,
-  resetAll,
-  scoreOf,
-  setMuted,
-  starsFor,
-  subscribe,
-} from "../lib/progress.js";
+import { answeredCount, getProgress, localDay, resetAll, scoreOf, starsFor, subscribe } from "../lib/progress.js";
 
 const FILTERS = [
   { id: "all", label: "सभी", emoji: "✨" },
@@ -28,7 +18,6 @@ const FILTERS = [
 export default function Home() {
   const progress = useSyncExternalStore(subscribe, getProgress);
   const [filter, setFilter] = useState("all");
-  const [muted, setMutedState] = useState(() => isMuted());
   const groups = useMemo(() => {
     return Object.values(CATEGORIES)
       .filter((category) => filter === "all" || filter === category.id)
@@ -55,12 +44,6 @@ export default function Home() {
   const recall = recallCard(progress);
   const streakOn = progress.streak.lastDay === localDay();
 
-  function toggleSound() {
-    const next = !muted;
-    setMuted(next);
-    setMutedState(next);
-  }
-
   function wipe() {
     const ok = window.confirm("सारी प्रगति मिटा दें? सेट फिर से नए जैसे हो जाएँगे।");
     if (ok) resetAll();
@@ -76,9 +59,6 @@ export default function Home() {
             <small>कक्षा 1 से 4</small>
           </div>
         </div>
-        <button className="icon-btn" type="button" onClick={toggleSound} aria-pressed={muted}>
-          {muted ? "🔇 आवाज़ बंद" : "🔊 आवाज़ चालू"}
-        </button>
       </header>
 
       <section className="hero">

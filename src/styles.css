@@ -63,6 +63,20 @@ a { color: inherit; }
   text-decoration: none;
 }
 
+.music-fab {
+  position: fixed;
+  z-index: 30;
+  top: 14px;
+  right: 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 800;
+  padding: 10px 14px;
+  box-shadow: 0 6px 0 #f0d3b4, 0 12px 24px rgba(255, 138, 61, 0.25);
+}
+.topbar, .quiz-top { padding-right: 124px; }
 .icon-btn, .back {
   background: #fff;
   border-radius: 999px;

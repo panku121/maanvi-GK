@@ -131,7 +131,7 @@ export default function Quiz() {
       <article className="question-card" style={{ "--tint": category.tint }}>
         <p className="q-kicker">सवाल {cursor + 1}</p>
         <h1>{question.q}</h1>
-        <button type="button" className="speak" onClick={hear}>
+        <button type="button" className="speak" data-sound="off" onClick={hear}>
           🔊 सुनो
         </button>
       </article>
@@ -150,6 +150,7 @@ export default function Quiz() {
               key={option}
               type="button"
               className={`option ${state}`}
+              data-sound="pick"
               onClick={() => choose(option)}
               disabled={locked}
             >
@@ -178,7 +179,7 @@ export default function Quiz() {
         )}
       </div>
 
-      <button type="button" className="primary next" onClick={next} disabled={!locked || shown === "wrong"}>
+      <button type="button" className="primary next" data-sound="next" onClick={next} disabled={!locked || shown === "wrong"}>
         {cursor === set.questions.length - 1 ? "नतीजा देखो" : "अगला सवाल"}
       </button>
     </div>

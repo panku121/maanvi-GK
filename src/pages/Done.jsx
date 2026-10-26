@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSyncExternalStore } from "react";
 import Icon from "../components/Icon.jsx";
 import Mascot from "../components/Mascot.jsx";
 import { getSet } from "../data/index.js";
 import { getProgress, resetSet, scoreOf, starsFor, subscribe } from "../lib/progress.js";
+import { playCheer } from "../lib/sound.js";
 
 export default function Done() {
   const { setId } = useParams();
@@ -11,6 +13,10 @@ export default function Done() {
   const set = getSet(setId);
   const progress = useSyncExternalStore(subscribe, getProgress);
   const saved = set ? progress.sets[set.id] : null;
+
+  useEffect(() => {
+    if (saved?.done) playCheer();
+  }, [setId, saved?.done]);
 
   if (!set || !saved?.done) {
     return (
